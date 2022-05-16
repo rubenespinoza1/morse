@@ -35,9 +35,7 @@ unsigned long lastMillis = 0;
 
 void setup() {
   Serial.begin(115200);
-  Serial.println("atempting to connect");
   Cayenne.begin(username, password, clientID, ssid, wifiPassword);
-  Serial.println("Connected *");
   pinMode(D7, INPUT);
   pinMode(D6, INPUT);
   pinMode(D5, INPUT);
@@ -185,7 +183,10 @@ String decrypt_message() {
       to_find_index = to_find_index + to_send.charAt(i);
     } else {
       int index = find_index(to_find_index);
-      to_send_decrypted = to_send_decrypted + letters[index];
+      if (index != -1){
+        to_send_decrypted = to_send_decrypted + letters[index];
+      }
+      
       to_find_index = "";
     }
   }
